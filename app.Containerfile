@@ -33,9 +33,10 @@ COPY --from=builder /app/yarn.lock ./
 COPY --from=builder /app/prisma ./prisma
 EXPOSE 3000
 
+RUN npm install pm2 -g
 
 RUN yarn prisma db push
 RUN yarn prisma generate
 
 # Start the application
-CMD ["yarn", "start"]
+CMD ["pm2-runtime", "dist/main.js"]
