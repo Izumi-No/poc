@@ -4,7 +4,7 @@ FROM node:21.6.1-alpine AS builder
 WORKDIR /app
 
 # Copy only necessary files for installation and build
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock pm2.json ./
 COPY ./src ./src
 COPY ./tsconfig.json ./
 COPY ./prisma ./prisma
@@ -30,6 +30,7 @@ COPY --from=builder /app/dist /app/dist
 COPY --from=builder /app/node_modules /app/node_modules
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/yarn.lock ./
+COPY --from=builder /app/pm2.json ./
 COPY --from=builder /app/prisma ./prisma
 EXPOSE 3000
 
@@ -39,4 +40,4 @@ RUN yarn prisma db push
 RUN yarn prisma generate
 
 # Start the application
-CMD ["pm2-runtime", "dist/main.js"]
+CMD ["pm2-runtime", "dist/main.js", "pm2.json"]
