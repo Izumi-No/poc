@@ -3,7 +3,17 @@ services:
     build:
       context: .
       dockerfile: ./nginx.Containerfile
-    network_mode: host
+   # network_mode: host
     ports:
       - "80:80"
       - "1935:1935"
+  app:
+    build:
+      context: .
+      dockerfile: ./app.Containerfile
+    #network_mode: host
+    ports:
+      - "3000:3000"
+    environment:
+      RTMP_URL: "rtmp://195.26.251.6:1935/live"
+      HLS_URL: "http://195.26.251.6:8081/hls"

@@ -2,10 +2,13 @@
   "name": "sla",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "tsx --watch src/main.ts"
+    "dev": "tsx --watch src/main.ts",
+    "build": "pkgroll",
+    "start": "node dist/main.js"
   },
+  "exports": "./dist/main.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -13,6 +16,7 @@
     "@types/express": "^5.0.0",
     "@types/node": "^22.8.4",
     "dotenv": "^16.4.5",
+    "pkgroll": "^2.5.1",
     "prisma": "^5.21.1",
     "tsc": "^2.0.4",
     "tsx": "^4.19.2"
@@ -20,6 +24,7 @@
   "dependencies": {
     "@prisma/client": "5.21.1",
     "express": "^4.21.1",
+    "typescript": "^5.6.3",
     "zod": "^3.23.8"
   }
 }
