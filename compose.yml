@@ -1,0 +1,9 @@
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx.Containerfile
+    network_mode: host
+    ports:
+      - "80:80"
+      - "1935:1935"
